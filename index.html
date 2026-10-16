@@ -617,6 +617,18 @@
             alert('Форма отправлена! Откроется WhatsApp для завершения отправки.');
         }
     );
+        document.addEventListener('click', function (event) {
+  const link = event.target.closest('a[href^="tel:"]');
+  if (!link || !navigator.sendBeacon) return;
+
+  navigator.sendBeacon(
+    'https://fridge.kz/api/call-event.php',
+    new URLSearchParams({
+      site: 'expert',
+      page: location.pathname
+    })
+  );
+}, true);
     </script>
 </body>
 </html>
